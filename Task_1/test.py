@@ -3,11 +3,11 @@ import json
 import uuid
 
             
-def add_employee(employees: list):
-    employee = get_employee()
-    employees.append(employee)
+def add_note(notes: list):
+    note = get_note()
+    notes.append(note)
 
-def get_employee() -> dict:
+def get_note() -> dict:
     result = {}
     result["id"] = get_id()
     result["title_note"] = get_title_note()
@@ -30,27 +30,25 @@ def get_text_note() -> str:
 def get_data_note() -> str:
     return str(datetime.now().strftime("%d.%m.%Y %H:%M:%S"))  
 
-def write_json(employees):
+def write_json(notes):
     with open('notebase.json', 'w', encoding='utf-8') as fout:
-        for employee in employees:
-            fout.write(json.dumps(employee) + '\n') 
+        for note in notes:
+            fout.write(json.dumps(note) + '\n') 
 
 def read_json() -> list:
-    employee = []
+    notes = []
     with open('notebase.json', 'r', encoding='utf-8') as fin:
         for line in fin:
             temp = json.loads(line.strip())
-            employee.append(temp)
-    return employee
+            notes.append(temp)
+    return notes
 
 
 
-employees = [{'id': 1, 'title_note': 'hhh', 'text_note': 'juiy', 'data_note': '2022'},{'id': 2, 'title_note': 'hhh', 'text_note': 'juiy', 'data_note': '2022'}]
+#notes = [{'id': 1, 'title_note': 'hhh', 'text_note': 'juiy', 'data_note': '2022'},{'id': 2, 'title_note': 'hhh', 'text_note': 'juiy', 'data_note': '2022'}]
 
 
 
-#write_json(employees)
-#print(read_json())
 
-note = get_employee()
-print(note)
+notes = read_json()
+print(notes)
