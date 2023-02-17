@@ -1,5 +1,7 @@
 import json
 import time
+import test
+import view
 
 def read_json() -> list:
     notes = []
@@ -8,6 +10,11 @@ def read_json() -> list:
             temp = json.loads(line.strip())
             notes.append(temp)
     return notes
+
+def write_json(notes):
+    with open('notebase.json', 'w', encoding='utf-8') as fout:
+        for note in notes:
+            fout.write(json.dumps(note) + '\n')
 
 def find_note_by_id(notes: list, id: str) -> dict:
     for note in notes:
@@ -38,10 +45,34 @@ def filtr_note_by_date(notes: list, date: str) -> dict:
     for note in notes:
         if note['data_note'][0:10] == date:
             list_data.append(note)
-    print(list_data)
+    return list_data
+
+def add_note(notes: list):
+    note = view.get_note()
+    notes.append(note)
+
+def del_note(notes: list, note: dict):
+    notes.remove(note)
+
+def update_note(notes: list, note: dict):
+    idx = view.get_changes()
+    if idx == 1:
+        note["title_note"] = view.get_title_note()
+        note["data_note"] = view.get_data_note()
+    elif idx == 2:
+        note["text_note"] = view.get_text_note()
+        note["data_note"] = view.get_data_note()
+    else:
+        print("Вы ввели неверный индекс") 
+
+  
 
 notes = read_json()
-#print(notes)
-note = filtr_note_by_date(notes, '15.02.2023')
+note = find_note_by_title_note(notes, "Прочитать")
+del_note(notes, note)
+test.write_json(notes)
+notes = read_json()
+print(notes)
+#note = filtr_note_by_date(notes, '15.02.2023')
 #print(note)
 

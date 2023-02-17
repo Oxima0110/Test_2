@@ -1,34 +1,11 @@
 from datetime import datetime
 import json
 import uuid
-
+import view
             
 def add_note(notes: list):
-    note = get_note()
+    note = view.get_note()
     notes.append(note)
-
-def get_note() -> dict:
-    result = {}
-    result["id"] = get_id()
-    result["title_note"] = get_title_note()
-    result["text_note"] = get_text_note()
-    result["data_note"] = get_data_note()
-    return result  
-
-def get_id() -> int:
-    return  str(uuid.uuid4())[0:3]
-
-
-def get_title_note() -> str:
-    return input("Введите заголовок заметки: ")
-
-
-def get_text_note() -> str:
-    return input("Введите текст заметки: ")
-
-
-def get_data_note() -> str:
-    return str(datetime.now().strftime("%d.%m.%Y %H:%M:%S"))  
 
 def write_json(notes):
     with open('notebase.json', 'w', encoding='utf-8') as fout:
@@ -50,5 +27,9 @@ def read_json() -> list:
 
 
 
-notes = read_json()
-print(notes)
+# notes = read_json()
+# add_note(notes)
+# add_note(notes)
+# add_note(notes)
+# print(notes)
+# write_json(notes)
