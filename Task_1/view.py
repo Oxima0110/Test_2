@@ -62,8 +62,9 @@ def get_changes() -> int:
 def check_data():
     while True:
         date = input('Введите дату в формате: dd/mm/yyyy: ')
+        temp = date
         try:
-            date = time.strptime(date, '%d.%m.%Y')
+            temp = time.strptime(date, '%d.%m.%Y')
             break
         except ValueError:
             print('Неправильный ввод даты!')
@@ -78,6 +79,9 @@ def no_note_show():
 
 def no_index_search():
     print("Неверный выбор, попробуйте еще раз")
+
+def info():
+    print("Операция выполнена успешно")
 
 def show_note_info(note: dict):
     for k, v in note.items():

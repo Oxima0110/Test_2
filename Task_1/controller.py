@@ -1,51 +1,58 @@
-import view
-import model
+#import model
+from json_file import (read_file, write_file)
+from view import (show_menu, no_note_show, show_list_note, 
+                no_note_error, show_note_info, no_index_search, info)
+from model import (filtr_note_by_date, find_note, add_note,
+                del_note, update)
 
 def run_work():
     while True:
-        choice = view.show_menu()
+        choice = show_menu()
         if choice == 1:             # просмотр всех записей
-            notes = model.read_json()
+            notes = read_file()
             if not notes:
-                view.no_note_show()
+                no_note_show()
             else:
-                view.show_list_note(notes)
+                show_list_note(notes)
         elif choice == 2:           # просмотр записи по дате
-            notes = model.read_json()
-            result = model.filtr_note_by_date(notes)
+            notes = read_file()
+            result = filtr_note_by_date(notes)
             if not result:
-                view.no_note_error()
+                no_note_error()
             else:
-                view.show_list_note(result)            
+                show_list_note(result)            
         elif choice == 3:           # поиск заметки
-            notes = model.read_json()
-            result = model.find_note(notes)
+            notes = read_file()
+            result = find_note(notes)
             if not result:
-                view.no_note_error()
+                no_note_error()
             else:
-                view.show_note_info(result)
+                show_note_info(result)
         elif choice == 4:           # добавление заметки
-            notes = model.read_json()
-            model.add_note(notes)
-            model.write_json(notes)
+            notes = read_file()
+            add_note(notes)
+            info()
+            write_file(notes)
         elif choice == 5:           # удаление заметки
-            notes = model.read_json()
-            note = model.find_note(notes)
+            notes = read_file()
+            result = find_note(notes)
             if not result:
-                view.no_note_error()
+                no_note_error()
             else:
-                model.del_note(notes, note)
-                model.write_json(notes)
+                del_note(notes, result)
+                info()
+                write_file(notes)
         elif choice == 6:           # обновить заметку
-            notes = model.read_json()
-            result = model.update(notes)
+            notes = read_file()
+            result = update(notes)
             if not result:
-                view.no_note_error()
+                no_note_error()
             else:
-                model.write_json(notes)
+                info()
+                write_file(notes)
         elif choice == 7:
             break
         else:
-            view.no_index_search()
+            no_index_search()
 
 
