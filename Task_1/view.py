@@ -7,18 +7,18 @@ def show_menu() -> int:
     print("\n" + "=" * 20)
     print("Выберите необходимое действие")
     print("1. Прсмотреть все заметки")
-    print("2. Найти заметку")
-    print("3. Добавить заметку")
-    print("4. Удалить заметку")
-    print("5. Обновить заметку")
-    print("6. Закончить работу")
+    print("2. Просмотр заметок по дате")
+    print("3. Найти заметку")
+    print("4. Добавить заметку")
+    print("5. Удалить заметку")
+    print("6. Обновить заметку")
+    print("7. Закончить работу")
     return int(input("Введите номер необходимого действия: "))
 
 def show_search_menu() -> int:
     print("\n" + "=" * 20)
     print("1.  Найти заметку по идентификатору")
     print("2.  Найти заметку по заголовку")
-    print("3.  Найти заметку по дате")
     return int(input("Введите номер необходимого действия: "))
 
 def show_update_menu() -> int:
@@ -48,7 +48,10 @@ def get_text_note() -> str:
 
 
 def get_data_note() -> str:
-    return str(datetime.now().strftime("%d.%m.%Y %H:%M:%S")) 
+    return str(datetime.now().strftime("%d.%m.%Y %H:%M:%S"))
+
+def get_search_id() -> str:
+    return input("Введите id заметки для поиска: ") 
 
 def get_changes() -> int:
     print("\nВыберите данные, которые необходимо изменить:")
@@ -63,12 +66,18 @@ def check_data():
             date = time.strptime(date, '%d.%m.%Y')
             break
         except ValueError:
-            print('Invalid date!')
+            print('Неправильный ввод даты!')
             continue
     return date
 
 def no_note_error():
     print("Такой заметки нет в записной книге")
+
+def no_note_show():
+    print("В записной книге нет заметок")
+
+def no_index_search():
+    print("Неверный выбор, попробуйте еще раз")
 
 def show_note_info(note: dict):
     for k, v in note.items():
