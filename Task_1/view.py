@@ -1,4 +1,5 @@
 
+import time
 import uuid
 from datetime import datetime
 
@@ -55,9 +56,27 @@ def get_changes() -> int:
     print("2. Текст заметки")
     return int(input("Введите номер выбранного пункта: "))
 
+def check_data():
+    while True:
+        date = input('Введите дату в формате: dd/mm/yyyy: ')
+        try:
+            date = time.strptime(date, '%d.%m.%Y')
+            break
+        except ValueError:
+            print('Invalid date!')
+            continue
+    return date
+
 def no_note_error():
-    print("Такого сотрудника нет в базе")
+    print("Такой заметки нет в записной книге")
 
 def show_note_info(note: dict):
     for k, v in note.items():
         print(f'{k}: {v}')
+
+def show_list_note(notes: list):
+    for item in notes:
+        print("\n" + "=" * 20)
+        show_note_info(item)
+        
+
