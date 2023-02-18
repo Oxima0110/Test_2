@@ -1,5 +1,3 @@
-
-
 from view import (check_data, get_note, get_changes, get_title_note, get_data_note, get_text_note, 
                 no_index_search, show_search_menu, get_search_id)
 

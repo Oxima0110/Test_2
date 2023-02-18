@@ -1,4 +1,3 @@
-#import model
 from json_file import (read_file, write_file)
 from view import (show_menu, no_note_show, show_list_note, 
                 no_note_error, show_note_info, no_index_search, info)
